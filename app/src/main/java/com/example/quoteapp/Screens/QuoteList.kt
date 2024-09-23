@@ -12,13 +12,12 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun QuoteList(data : Array<Quote>,onClick : () -> Unit){
+fun QuoteList(data : Array<Quote>,onClick : (quote:Quote) -> Unit){
+
     LazyColumn( modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp), content =  {
      items(data){
-         QuoteListItem(quote = it) {
-             onClick()
-         }
+         QuoteListItem(quote = it,onClick)
      }
     })
 }

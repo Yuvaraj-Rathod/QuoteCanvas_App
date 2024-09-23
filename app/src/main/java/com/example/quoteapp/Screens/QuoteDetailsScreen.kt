@@ -1,5 +1,6 @@
 package com.example.quoteapp.Screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,12 +25,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.quoteapp.DataManager
 import com.example.quoteapp.models.Quote
-
-
 
 @Composable
 fun QuoteDetail(quote: Quote) {
+
+    BackHandler {
+        DataManager.switchPages(null)
+    }
+
     Box(contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize(1f)
@@ -65,10 +70,4 @@ fun QuoteDetail(quote: Quote) {
 
         }
     }
-}
-
-@Preview
-@Composable
-private fun previewQuoteDetail() {
-     QuoteDetail(quote = Quote("Iam yuvaraj from Bvb and now atm im cheking the the nothing sry good night","Yuvaraj"))
 }

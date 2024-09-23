@@ -41,9 +41,11 @@ import com.example.quoteapp.models.Quote
 
 
 @Composable
- fun QuoteListItem (quote : Quote,onClick : () -> Unit) {
+ fun QuoteListItem (quote : Quote,onClick : (quote:Quote) -> Unit) {
+
 Card(elevation = CardDefaults.cardElevation(4.dp),
-    modifier = Modifier.clickable { onClick() }
+    modifier = Modifier
+        .clickable { onClick(quote) }
         .padding(16.dp,10.dp))
 {
          Row (modifier = Modifier.padding(10.dp)){

@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.quoteapp.Screens.QuoteDetail
 import com.example.quoteapp.Screens.QuoteListScreen
 import com.example.quoteapp.ui.theme.QuoteAppTheme
 import kotlinx.coroutines.CoroutineScope
@@ -40,11 +41,19 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-  if(DataManager.isDataLoaded){
-      QuoteListScreen(data = DataManager.data) {
-          
+
+  if(DataManager.isDataLoaded.value){
+
+      if(DataManager.currentPage.value == pages.Listing) {
+          QuoteListScreen(data = DataManager.data){
+              DataManager.switchPages(it)
+          }
       }
-  }else{
+      else{
+          DataManager.currentQuote?.let { QuoteDetail(quote = it) }
+      }
+  }
+  else{
       Box(
           contentAlignment = Alignment.Center,
           modifier = Modifier.fillMaxSize(1f)
@@ -53,4 +62,9 @@ fun App() {
             style = MaterialTheme.typography.headlineSmall)
       }
   }
+}
+
+enum class pages{
+    Listing,
+    Detail
 }
